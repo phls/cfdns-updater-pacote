@@ -1,0 +1,46 @@
+#!/bin/sh
+set -e
+
+CONFIG=/etc/cfdns-updater.env
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+    if [ ! -f "$CONFIG" ]; then
+        install -m600 /usr/share/doc/cfdns-updater/examples/cfdns-updater.env-example "$CONFIG"
+    fi
+    # The config holds the API token; keep it root-only even if created by hand
+    chmod 600 "$CONFIG"
+    if grep -q "your_zone_id_here" "$CONFIG"; then
+       echo "cfdns-updater warning: edit $CONFIG file, then run: systemctl start cfdns-updater"
+    fi
+fi
+
+# Automatically added by dh_installsystemd/14.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# The following line should be removed in trixie or trixie+1
+	deb-systemd-helper unmask 'cfdns-updater.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'cfdns-updater.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'cfdns-updater.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'cfdns-updater.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/14.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -z "$DPKG_ROOT" ] && [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'cfdns-updater.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
