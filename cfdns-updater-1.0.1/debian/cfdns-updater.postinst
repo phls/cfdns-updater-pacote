@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+CONFIG=/etc/cfdns-updater.env
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+    if [ ! -f "$CONFIG" ]; then
+        install -m600 /usr/share/doc/cfdns-updater/examples/cfdns-updater.env-example "$CONFIG"
+    fi
+    # The config holds the API token; keep it root-only even if created by hand
+    chmod 600 "$CONFIG"
+    if grep -q "your_zone_id_here" "$CONFIG"; then
+       echo "cfdns-updater warning: edit $CONFIG file, then run: systemctl start cfdns-updater"
+    fi
+fi
+
+#DEBHELPER#

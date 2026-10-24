@@ -1,0 +1,54 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Thu, 22 Oct 2026 17:12:06 -0300
+Source: cfdns-updater
+Binary: cfdns-updater
+Architecture: source all
+Version: 1.0.1-1
+Distribution: unstable
+Urgency: medium
+Maintainer: Paulo Henrique de Lima Santana (phls) <phls@debian.org>
+Changed-By: Paulo Henrique de Lima Santana (phls) <phls@debian.org>
+Description:
+ cfdns-updater - Cloudflare dynamic DNS updater
+Changes:
+ cfdns-updater (1.0.1-1) unstable; urgency=medium
+ .
+   * Initial release. (Closes: #nnnn).
+Checksums-Sha1:
+ ba11c4792fe47dc67228cce3f7a488f26f4a35d6 1811 cfdns-updater_1.0.1-1.dsc
+ 903c3f95e9550e110a9f8ab378ba85258425486a 6214 cfdns-updater_1.0.1.orig.tar.gz
+ 8423b47732dc8e2816200ad532e2daafe53f8906 5188 cfdns-updater_1.0.1-1.debian.tar.xz
+ 9563286f6513fb54ec30ab37c5a6e02575d67eb5 9804 cfdns-updater_1.0.1-1_all.deb
+ d708986f9f26657d2b357958e2a3ed3baeface45 5584 cfdns-updater_1.0.1-1_amd64.buildinfo
+Checksums-Sha256:
+ 06a0f03e4c42d8100f14a533725dd57cbbc4ec1ee3bd597191e4a3dd7dc8baa0 1811 cfdns-updater_1.0.1-1.dsc
+ 57899a7fed296562c32fe9856f6efc59519ae75531138b0ec6b8ee809226eab2 6214 cfdns-updater_1.0.1.orig.tar.gz
+ dac12b2e5ac23104247bd46d74a6d2d45ac515bbef1c0086b582a2c72de24353 5188 cfdns-updater_1.0.1-1.debian.tar.xz
+ 0d03bd3818140d03e50618b80fc475f3538395a46f5e080d5731e94076723030 9804 cfdns-updater_1.0.1-1_all.deb
+ 0884d5ead67579f65e66541c9a4c08568d4e4c9271510ca31065578934240d1b 5584 cfdns-updater_1.0.1-1_amd64.buildinfo
+Files:
+ d4efe647231e56d9b9301fd582a33b98 1811 net optional cfdns-updater_1.0.1-1.dsc
+ eebabd56a94b0d842df7001b691421fc 6214 net optional cfdns-updater_1.0.1.orig.tar.gz
+ 1432f6e57663af42f505ba6288e4bb71 5188 net optional cfdns-updater_1.0.1-1.debian.tar.xz
+ 6d1a0b32e82c898400005770c82f6c56 9804 net optional cfdns-updater_1.0.1-1_all.deb
+ fdc129c6be4c6a36a736f5516b8cca74 5584 net optional cfdns-updater_1.0.1-1_amd64.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEQySpKy57hdp/nJxAxm0GtARDxFAFAmrc/34ACgkQxm0GtARD
+xFBbUBAAhyKTf5xdYLCMCfvFpwmJJOO694K52Sd6ip/67YrPHKM6rpaErzdvUfW5
+Gr6GntkM7N7Lq9winA2vTWL+2Ro8VcQdwRWhxpZlPaDXgoEpm6fyf/BEKnEX6+tg
+xq8FcS6cUHxAyo9htK+3hXJ8o2Dqf+Qy59RWFjNkKLmx1sPK3uPVyjwQMLTKKVjM
+Eg784AMxY2zRBYiZ4bncDN2ghdHmgSlpKonpcMdOGSlAAyTQxVl8wRvDwR5bxbYy
+7eBa1c7y0/9Dp+aO5/WGdDpcJOc7Vi+tPw5nRHF3yFRXgy9G4zLeleFVqP3iO3Ow
+akrDJ1nR/JuJWlftMO21mRSfIsSCCA6VjNJ1x5zmmBn4IxC5sBkbp14qYJSxDWfJ
+qsj/vt8c0RYpUWeLby/6INXfMXPYMHc54EHV9INxwwq3ssr3LcrVCkYlfVgsQ7vE
+/J3RAMW67bOLz4XDERvnhYZyncb7Ux/dF3JQ7vLvs0KLPDYl4xtRwBvsPGvuE94B
+uwubaTSTC5Iv9LdpUG2EHCVYsZtg30w+/I01ykUocqLip6MBfRX3K6T+HMTOUZjx
+G4TbBcMfQr409R8BrdUmpRPQcLtBZkPYklBn0WPloQWfnTJNJgwOen/lzBkQ6r6c
+JKYfkjK3rsxQICQ+2stwozHxr98iMW+lRVEwwS6fLR3foVZOS/4=
+=smzJ
+-----END PGP SIGNATURE-----

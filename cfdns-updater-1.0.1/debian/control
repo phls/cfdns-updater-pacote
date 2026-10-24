@@ -1,0 +1,19 @@
+Source: cfdns-updater
+Section: net
+Maintainer: Paulo Henrique de Lima Santana (phls) <phls@debian.org>
+Build-Depends: debhelper-compat (= 14),
+               dh-sequence-single-binary,
+Standards-Version: 4.7.4
+Homepage: https://github.com/eduardomacan/cfdns-updater
+#Vcs-Browser: https://salsa.debian.org/debian/cfdns-updater
+#Vcs-Git: https://salsa.debian.org/debian/cfdns-updater.git
+
+Package: cfdns-updater
+Architecture: all
+Depends: ${misc:Depends},
+         bash (>=5.2),
+         curl,
+         systemd
+Description: Cloudflare dynamic DNS updater
+ Monitors the public IP address and updates a Cloudflare DNS A record
+ when it changes. Runs as the dns-updater systemd service.

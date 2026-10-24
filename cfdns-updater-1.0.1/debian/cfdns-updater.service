@@ -1,0 +1,18 @@
+[Unit]
+Description=Cloudflare DNS Updater Service
+After=network-online.target
+Wants=network-online.target
+Documentation=man:cfdns-updater(7)
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+EnvironmentFile=/etc/cfdns-updater.env
+WorkingDirectory=/usr/bin
+ExecStart=/usr/bin/cfdns-updater
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

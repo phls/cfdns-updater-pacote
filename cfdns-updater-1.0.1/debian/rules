@@ -1,0 +1,6 @@
+#!/usr/bin/make -f
+
+export DH_DEB_SYSTEMD_HELPER_DEBUG=1
+
+%:
+	dh $@

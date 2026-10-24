@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = "purge" ]; then
+        echo "removing the file /etc/cfdns-updater.env"
+	rm -f /etc/cfdns-updater.env
+fi

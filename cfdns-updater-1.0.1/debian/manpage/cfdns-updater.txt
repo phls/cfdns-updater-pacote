@@ -1,0 +1,106 @@
+.SH NAME
+
+  cfdns-updater - Cloudflare dynamic DNS updater
+
+.SH DESCRIPTION
+
+  A Bash script that monitors your public IP address and automatically updates a
+  Cloudflare DNS A record when it changes. Designed to run as a systemd service.
+
+.SH PREREQUISITES
+
+  * Cloudflare account with a domain
+  * Cloudflare API token with DNS edit permissions
+  * A Linux system with systemd
+  * curl
+
+
+.SH MANUAL SETUP
+
+.SS 1 - Configure Environment Variables
+  
+  Edit `/etc/cfdns-updater.env` and set:
+        
+* CLOUDFLARE_ZONE_ID Description: Your Cloudflare zone ID (found in URL or overview page)
+* CLOUDFLARE_DNS_RECORD_ID Description: The DNS record ID to update
+* CLOUDFLARE_API_TOKEN Description: Cloudflare API token with Zone.DNS:Edit permission
+* DNS_RECORD Description: The full DNS record name (e.g., home.example.com)
+
+.SS 2 - Get Cloudflare IDs
+
+  Zone ID: Found in Cloudflare Dashboard > Overview (right sidebar)
+       
+  DNS Record ID: Use Cloudflare API:
+
+         # curl -s -H "Authorization: Bearer YOUR_API_TOKEN" \\
+         # https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/dns_records \\
+         # | jq '.result[] | select(.name=="yourhost.domain.com") | .id'
+
+.SH USAGE
+
+.SS Run as daemon (default, runs continuously)
+
+  cfdns-updater
+
+.SS Run once and exit (useful for cron or manual execution)
+
+  cfdns-updater --run-once
+ 
+  cfdns-updater -n
+
+.SS View help
+         
+  cfdns-updater --help
+
+.SS View logs
+         
+  journalctl -u cfdns-updater -f
+
+.SS Restart service (e.g., after config changes)
+         
+  sudo systemctl restart cfdns-updater
+
+.SS Stop service
+         
+  sudo systemctl stop cfdns-updater
+
+.SH CONFIGURATION
+
+  Edit /opt/cfdns-updater/cfdns-updater to customize:
+
+* IP_FILE Default /run/cfdns-lastip Description: File storing last known IP.
+* CHECK_INTERVAL Default: 300 Description: Seconds between IP checks.
+* RETRY_INTERVAL Default: 60 Description: Seconds before retrying after a failed lookup or update.
+* VERIFY_EVERY Default: 12 Description: Compare against the live Cloudflare record every N checks (and on startup).
+
+.SH HOW IT WORKS
+
+  Fetches current public IP from https://checkip.amazonaws.com and validates it.
+
+  Compares with the last known IP (cached in `/run/cfdns-lastip`, and
+  periodically read from the Cloudflare record itself).
+
+  If different, updates Cloudflare DNS record via API.
+
+  Caches the new IP only after Cloudflare confirms the update; on any failure it
+  retries after 60 seconds.
+
+  Sleeps for 5 minutes, then repeats (all network calls have timeouts, so the
+  loop can't hang).
+
+  Handles graceful shutdown on systemd stop/restart.
+
+  With `--run-once`, the exit code is non-zero if the IP lookup or the update
+  fails.
+
+  For reliable updates after a reboot, make sure a network wait-online service
+  is enabled (`systemd-networkd-wait-online` or `NetworkManager-wait-online`),
+  otherwise `network-online.target` may be reached before the network is
+  actually usable.
+
+.SH AUTHOR
+
+  The CFDNS-UPDATER was written by Eduardo Marcel Maçan <eduardomacan@gmail.com>.
+
+  This manual page was written by Paulo Henrique de Lima Santana (phls) <phls@debian.org>
+  for the Debian project (but may be used by others).
